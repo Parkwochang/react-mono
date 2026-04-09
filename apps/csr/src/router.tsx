@@ -15,11 +15,13 @@ export function getRouter() {
     context: {
       queryClient,
     },
+    notFoundMode: 'root',
     scrollRestoration: true,
     defaultPreload: 'intent',
     defaultPendingMs: 0,
     defaultPreloadStaleTime: 0,
     defaultPendingComponent: LoadingIndicatorScreen,
+    defaultNotFoundComponent: () => <div>Not found</div>,
     Wrap: ({ children }) => <QueryProvider client={queryClient}>{children}</QueryProvider>,
   });
 

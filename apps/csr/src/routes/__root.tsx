@@ -7,7 +7,7 @@ export const Route = createRootRouteWithContext<AppRouterContext>()({
   // 공통 에러 -> api 에러 발생시 get 400, post 401 등 에러 발생시 이 컴포넌트가 렌더링됨
   errorComponent: ({ error }) => <div>Error: {error.message}</div>,
   // 공통 404
-  notFoundComponent: () => <div>Not found</div>,
+  notFoundComponent: AppNotFound,
 });
 
 function RootLayout() {
@@ -35,6 +35,34 @@ function RootLayout() {
         `src/routes` 아래 파일을 추가하면 새 페이지가 됩니다.
       </footer>
     </div>
+  );
+}
+
+function AppNotFound() {
+  return (
+    <section className="rounded-[2rem] border border-rose-400/30 bg-rose-400/10 p-6 sm:p-8">
+      <p className="text-sm font-semibold uppercase tracking-[0.24em] text-rose-200">404 Route</p>
+      <h2 className="mt-3 text-3xl font-semibold tracking-tight text-white">
+        요청한 페이지를 찾을 수 없습니다.
+      </h2>
+      <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-300">
+        현재 URL과 일치하는 파일 라우트가 없습니다. 존재하는 경로로 다시 이동해보세요.
+      </p>
+      <div className="mt-6 flex flex-wrap gap-3">
+        <Link
+          to="/"
+          className="rounded-full bg-cyan-400 px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-cyan-300"
+        >
+          홈으로 이동
+        </Link>
+        <Link
+          to="/posts"
+          className="rounded-full border border-white/15 px-5 py-3 text-sm font-semibold text-white transition hover:border-cyan-300/60 hover:text-cyan-100"
+        >
+          Posts 보기
+        </Link>
+      </div>
+    </section>
   );
 }
 

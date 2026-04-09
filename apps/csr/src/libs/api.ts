@@ -6,7 +6,7 @@ import ky from 'ky';
 // ! api 베이스 모듈
 
 export const ApiInstance = ky.create({
-  baseUrl: process.env.BASE_URL,
+  baseUrl: import.meta.env.BASE_URL,
   headers: {
     'Content-Type': 'application/json',
   },

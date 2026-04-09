@@ -1,5 +1,5 @@
 {
-  "name": "sample",
+  "name": "csr",
   "private": true,
   "type": "module",
   "imports": {
@@ -18,7 +18,6 @@
   "dependencies": {
     "@tanstack/react-devtools": "catalog:frameworks",
     "@tanstack/react-router": "catalog:frameworks",
-    "@tanstack/react-router-devtools": "catalog:frameworks",
     "@tanstack/react-query": "catalog:utils",
     "react": "catalog:frameworks",
     "react-dom": "catalog:frameworks",
@@ -35,12 +34,15 @@
     "clsx": "catalog:styles",
     "tailwind-merge": "catalog:styles",
     "@tanstack/devtools-vite": "catalog:frameworks",
+    "@tanstack/react-router-devtools": "catalog:frameworks",
+    "@tanstack/router-plugin": "catalog:frameworks",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/react": "^16.3.0",
     "@types/node": "catalog:frameworks",
     "@types/react": "catalog:frameworks",
     "@types/react-dom": "catalog:frameworks",
     "@vitejs/plugin-react": "catalog:frameworks",
+    "babel-plugin-react-compiler": "catalog:frameworks",
     "jsdom": "^28.1.0",
     "typescript": "catalog:",
     "vite": "catalog:frameworks",

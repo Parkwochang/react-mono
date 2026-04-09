@@ -1,0 +1,51 @@
+{
+  "name": "starter",
+  "private": true,
+  "type": "module",
+  "imports": {
+    "#/*": "./src/*"
+  },
+  "scripts": {
+    "dev": "vite dev --port 3000",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "format": "biome format",
+    "lint": "biome lint",
+    "check": "biome check",
+    "check-types": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@tanstack/react-devtools": "catalog:frameworks",
+    "@tanstack/react-router": "catalog:frameworks",
+    "@tanstack/react-start": "catalog:frameworks",
+    "@tanstack/react-query": "catalog:utils",
+    "react": "catalog:frameworks",
+    "react-dom": "catalog:frameworks",
+    "react-hook-form": "catalog:validators",
+    "@hookform/resolvers": "catalog:validators",
+    "zod": "catalog:validators",
+    "ky": "catalog:utils"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.4.5",
+    "@tailwindcss/typography": "catalog:styles",
+    "@tailwindcss/vite": "catalog:styles",
+    "tailwindcss": "catalog:styles",
+    "clsx": "catalog:styles",
+    "tailwind-merge": "catalog:styles",
+    "@tanstack/devtools-vite": "catalog:frameworks",
+    "@tanstack/react-router-devtools": "catalog:frameworks",
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/react": "^16.3.0",
+    "@types/node": "catalog:frameworks",
+    "@types/react": "catalog:frameworks",
+    "@types/react-dom": "catalog:frameworks",
+    "@vitejs/plugin-react": "catalog:frameworks",
+    "jsdom": "^28.1.0",
+    "typescript": "catalog:",
+    "vite": "catalog:frameworks",
+    "vite-tsconfig-paths": "catalog:frameworks",
+    "vitest": "catalog:frameworks"
+  }
+}

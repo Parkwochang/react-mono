@@ -23,6 +23,7 @@ function RootLayout() {
             <NavLink to="/">Home</NavLink>
             <NavLink to="/about">About</NavLink>
             <NavLink to="/posts">Posts</NavLink>
+            <NavLink to="/table">Table</NavLink>
           </nav>
         </div>
       </header>
@@ -42,9 +43,7 @@ function AppNotFound() {
   return (
     <section className="rounded-[2rem] border border-rose-400/30 bg-rose-400/10 p-6 sm:p-8">
       <p className="text-sm font-semibold uppercase tracking-[0.24em] text-rose-200">404 Route</p>
-      <h2 className="mt-3 text-3xl font-semibold tracking-tight text-white">
-        요청한 페이지를 찾을 수 없습니다.
-      </h2>
+      <h2 className="mt-3 text-3xl font-semibold tracking-tight text-white">요청한 페이지를 찾을 수 없습니다.</h2>
       <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-300">
         현재 URL과 일치하는 파일 라우트가 없습니다. 존재하는 경로로 다시 이동해보세요.
       </p>
@@ -66,7 +65,7 @@ function AppNotFound() {
   );
 }
 
-function NavLink(props: { to: '/' | '/about' | '/posts'; children: React.ReactNode }) {
+function NavLink(props: { to: '/' | '/about' | '/posts' | '/table'; children: React.ReactNode }) {
   return (
     <Link
       to={props.to}

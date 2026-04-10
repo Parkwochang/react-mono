@@ -1,6 +1,6 @@
 import ky from 'ky';
 
-// import { KyOptions } from './http';
+import { KyOptions } from './api-option';
 
 // ----------------------------------------------------------------------
 // ! api 베이스 모듈
@@ -13,9 +13,9 @@ export const ApiInstance = ky.create({
   credentials: 'include', // Cross-Origin 쿠키 전송을 위해 추가
   timeout: 10000,
   // 전 후 처리 로직
-  // hooks: {
-  //   beforeRequest: [KyOptions.setClientHeader],
-  //   afterResponse: [KyOptions.afterClientResponseLog],
-  //   beforeError: [KyOptions.beforeClientErrorLog],
-  // },
+  hooks: {
+    // beforeRequest: [KyOptions.setClientHeader],
+    afterResponse: [KyOptions.afterResponseLog],
+    beforeError: [KyOptions.beforeErrorLog],
+  },
 });

@@ -23,6 +23,7 @@
     "react-dom": "catalog:frameworks",
     "react-hook-form": "catalog:validators",
     "@hookform/resolvers": "catalog:validators",
+    "@tanstack/react-table": "catalog:grid",
     "zod": "catalog:validators",
     "ky": "catalog:utils"
   },

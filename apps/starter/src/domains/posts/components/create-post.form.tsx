@@ -1,5 +1,3 @@
-import { Outlet } from '@tanstack/react-router';
-
 import { Form, FormField, FormMessage, Input, Label, Textarea } from '@/shared/ui';
 import { usePostCreateForm } from '../hooks';
 

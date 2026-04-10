@@ -50,3 +50,5 @@ catalogs:
   utils:
     ky: 2.0.0
     '@tanstack/react-query': ^5.96.2
+  grid:
+    '@tanstack/react-table': ^8.21.3

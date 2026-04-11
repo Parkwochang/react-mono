@@ -1,7 +1,7 @@
-import { createFileRoute } from '@tanstack/react-router';
+import { createFileRoute } from "@tanstack/react-router";
 
-import { TableScreen } from '@/domains/table/components';
+import { TableGrid } from "@/domains/table/components";
 
-export const Route = createFileRoute('/table/')({
-  component: TableScreen,
+export const Route = createFileRoute("/table/")({
+  component: TableGrid,
 });

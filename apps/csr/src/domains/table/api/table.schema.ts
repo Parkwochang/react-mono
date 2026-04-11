@@ -21,7 +21,7 @@ const UpsertTableSchema = z.object({
   owner    : z.string(),
   team     : z.string(),
   status   : z.string(),
-  priority : z.number(),
+  priority : z.enum(['Low', 'Medium', 'High']),
   progress : z.number(),
   tasks    : z.number(),
   focus    : z.string(),
@@ -32,12 +32,12 @@ export const CreateTableSchema = UpsertTableSchema.transform((data) => ({
   updatedAt: new Date().toISOString(),
 }));
 
-export const UpdateTableSchema = UpsertTableSchema.partial()
-  .extend({ id: z.string() })
-  .transform((data) => ({
+export const UpdateTableSchema = UpsertTableSchema.extend({ id: z.string(), updatedAt: z.string() }).transform(
+  (data) => ({
     ...data,
     updatedAt: new Date().toISOString(),
-  }));
+  })
+);
 
 // ----------------------------------------------------------------------
 // prettier-ignore

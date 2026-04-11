@@ -1,16 +1,16 @@
-import { HTTPError } from 'ky';
-import type { AfterResponseHook, BeforeErrorHook } from 'ky';
+import { HTTPError } from "ky";
+import type { AfterResponseHook, BeforeErrorHook } from "ky";
 
-import { clientLogger } from './log';
+import { clientLogger } from "./log";
 
 export class KyOptions {
-  static afterResponseLog: AfterResponseHook = ({ request, options, response }) => {
+  static afterResponseLog: AfterResponseHook = ({ request, response }) => {
     if (response.ok) {
       clientLogger({
         status: response.status,
         reqData: request,
         resData: response,
-        method: 'log',
+        method: "log",
       });
     }
 
@@ -20,13 +20,13 @@ export class KyOptions {
   // ----------------------------------------------------------------------
   // ! ERROR handler
 
-  static beforeErrorLog: BeforeErrorHook = async ({ error, request, options }) => {
+  static beforeErrorLog: BeforeErrorHook = async ({ error, request }) => {
     if (error instanceof HTTPError) {
       clientLogger({
         status: error.response?.status,
         reqData: request,
         resData: error.response?.body,
-        method: 'error',
+        method: "error",
       });
     }
 

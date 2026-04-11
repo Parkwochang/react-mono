@@ -12,7 +12,7 @@ export const Route = createRootRouteWithContext<AppRouterContext>()({
 
 function RootLayout() {
   return (
-    <div className="mx-auto flex min-h-screen w-full max-w-6xl flex-col px-4 py-6 text-slate-100 antialiased sm:px-6 lg:px-8">
+    <div className="mx-auto flex min-h-screen w-full max-w-7xl flex-col px-4 py-6 text-slate-100 antialiased sm:px-6 lg:px-8">
       <header className="mb-8 rounded-3xl border border-white/10 bg-white/5 px-5 py-4 backdrop-blur">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>

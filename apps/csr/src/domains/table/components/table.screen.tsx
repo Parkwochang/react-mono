@@ -1,20 +1,28 @@
-import { Activity } from 'react';
-
 import { TableViewer } from '@/shared/ui';
+import { cn } from '@/libs';
+import { TableFilter } from './table.filter';
+import { TableForm } from './table.form';
+import { useGetTable, useGridApi } from '../hooks';
 import { TABLE_COLUMNS } from '@/constants/columns';
 import { TABLE_DEFAULT_ROW } from '@/data/table';
-import { TableFilter } from './table.filter';
-import { useGetTable } from '../hooks';
+import type { TableEntity } from '../api';
 
 // ----------------------------------------------------------------------
 
 export const TableScreen = () => {
-  const tableData = useGetTable();
+  const { data } = useGetTable();
 
-  const liveCount = tableData.data?.filter((item) => item.status === 'live').length ?? 0;
-  const reviewingCount = tableData.data?.filter((item) => item.status === 'reviewing').length ?? 0;
-  const averageProgress = tableData.data?.length
-    ? tableData.data?.reduce((acc, item) => acc + item.progress, 0) / tableData.data?.length
+  const grid = useGridApi({
+    data: data ?? [],
+    columns: TABLE_COLUMNS,
+    defaultRow: TABLE_DEFAULT_ROW,
+    getRowId: (row: TableEntity.TableRes) => row.id,
+  });
+
+  const liveCount = grid.rowData.filter((item) => item.status === 'Live').length;
+  const reviewingCount = grid.rowData.filter((item) => item.status === 'Reviewing').length;
+  const averageProgress = grid.rowData.length
+    ? grid.rowData.reduce((acc, item) => acc + item.progress, 0) / grid.rowData.length
     : 0;
 
   return (
@@ -42,21 +50,29 @@ export const TableScreen = () => {
           />
           <MetricCard
             label="Avg Progress"
-            value={`${averageProgress}%`}
+            value={`${Math.round(averageProgress)}%`}
             description="현재 진행률 평균"
           />
         </div>
       </section>
 
-      <section className="rounded-[2rem] border border-white/10 bg-white/5 p-4 backdrop-blur sm:p-6">
-        <Activity mode={tableData.data ? 'visible' : 'hidden'}>
+      <section className={cn('grid gap-4', grid.hasSelectedRow ? 'xl:grid-cols-[minmax(0,1fr)_24rem]' : 'grid-cols-1')}>
+        <div className="rounded-[2rem] border border-white/10 bg-white/5 p-4 backdrop-blur sm:p-6">
           <TableViewer
-            columns={TABLE_COLUMNS}
-            data={tableData.data ?? []}
-            defaultRow={TABLE_DEFAULT_ROW}
+            table={grid.table}
             renderItem={(table) => <TableFilter table={table} />}
           />
-        </Activity>
+        </div>
+
+        {grid.selectedRow && grid.selectedRowId && (
+          <TableForm
+            row={grid.selectedRow}
+            onClose={grid.clearRowSelection}
+            onSave={(updatedRow) => {
+              grid.updateRow(grid.selectedRowId, updatedRow);
+            }}
+          />
+        )}
       </section>
     </div>
   );

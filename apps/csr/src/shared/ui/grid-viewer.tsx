@@ -1,13 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import {
-  type ColumnDef,
-  type Table as TableType,
-  flexRender,
-  getCoreRowModel,
-  getFilteredRowModel,
-  getSortedRowModel,
-  useReactTable,
-} from '@tanstack/react-table';
+import { type Table as TableType, flexRender } from '@tanstack/react-table';
 
 import { cn } from '@/libs';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from './table';
@@ -15,61 +6,12 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '.
 // ----------------------------------------------------------------------
 
 interface DataTableProps<TData> {
-  columns: ColumnDef<TData>[];
-  data: TData[];
+  table: TableType<TData>;
   renderItem?: (table: TableType<TData>) => React.ReactElement;
   className?: string;
-  defaultRow?: TData;
 }
 
-export const TableViewer = <TData,>({ data, columns, defaultRow, className, renderItem }: DataTableProps<TData>) => {
-  const [rowSelection, setRowSelection] = useState({});
-  const [rowData, setRowData] = useState<TData[]>(data);
-
-  const table = useReactTable({
-    data: rowData,
-    columns,
-    enableRowSelection: true,
-    enableColumnPinning: true,
-    getCoreRowModel: getCoreRowModel(),
-    getSortedRowModel: getSortedRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
-    onRowSelectionChange: setRowSelection,
-    initialState: {
-      columnPinning: {
-        left: ['expand-column'],
-      },
-    },
-    state: {
-      rowSelection,
-    },
-    meta: {
-      addRow: () => {
-        setRowData((pre) => {
-          return defaultRow ? [defaultRow, ...pre] : pre;
-        });
-      },
-      updateData: (rowIndex, columnId, value) => {
-        setRowData((old) =>
-          old.map((row, index) => {
-            if (index === rowIndex) {
-              return {
-                ...old[rowIndex]!,
-                [columnId]: value,
-              };
-            }
-            return row;
-          })
-        );
-      },
-    },
-  });
-
-  useEffect(() => {
-    setRowData(data);
-    setRowSelection({});
-  }, [data]);
-
+export const TableViewer = <TData,>({ table, className, renderItem }: DataTableProps<TData>) => {
   return (
     <>
       {renderItem && <div className="px-1 pb-4">{renderItem(table)}</div>}
@@ -102,42 +44,52 @@ export const TableViewer = <TData,>({ data, columns, defaultRow, className, rend
             </TableHeader>
             <TableBody className="[&_tr:last-child]:border-b-0">
               {table.getRowModel().rows?.length ? (
-                table.getRowModel().rows.map((row) => (
-                  <TableRow
-                    key={row.id}
-                    className="group whitespace-nowrap border-b border-white/8 odd:bg-white/[0.02] hover:bg-cyan-400/[0.05] data-[state=selected]:bg-cyan-400/[0.1]"
-                    data-state={row.getIsSelected() && 'selected'}
-                    aria-keyshortcuts="Space"
-                    // onKeyDown={(e) => {
-                    //   e.preventDefault();
-                    //   if (e.key == ' ' || e.code == 'Space' || e.keyCode == 32) {
-                    //     row.getToggleSelectedHandler()(e);
-                    //   }
-                    // }}
-                    // onClick={(e) => {
-                    //   e.preventDefault();
-                    //   e.stopPropagation();
-                    //   row.getToggleSelectedHandler()(e);
-                    // }}
-                  >
-                    {row.getVisibleCells().map((cell) => (
-                      <TableCell
-                        className={cn(
-                          'px-4 py-3.5 text-center text-sm text-slate-200',
-                          cell.column.getIsPinned() &&
-                            'sticky left-0 z-10 bg-slate-950/92 shadow-[10px_0_24px_rgba(2,6,23,0.22)] transition-colors group-hover:bg-slate-900/95 group-data-[state=selected]:bg-cyan-950/35'
-                        )}
-                        key={cell.id}
-                      >
-                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                      </TableCell>
-                    ))}
-                  </TableRow>
-                ))
+                table.getRowModel().rows.map((row) => {
+                  const active = row.getIsSelected();
+                  const interactive = row.getCanSelect();
+
+                  return (
+                    <TableRow
+                      key={row.id}
+                      className={cn(
+                        'group whitespace-nowrap border-b border-white/8 odd:bg-white/[0.02] hover:bg-cyan-400/[0.05] data-[state=selected]:bg-cyan-400/[0.1]',
+                        interactive && 'cursor-pointer',
+                        active && 'bg-cyan-400/[0.08] shadow-[inset_0_0_0_1px_rgba(103,232,249,0.18)]'
+                      )}
+                      data-state={active ? 'selected' : undefined}
+                      aria-keyshortcuts={interactive ? 'Enter Space' : undefined}
+                      tabIndex={interactive ? 0 : undefined}
+                      onClick={interactive ? () => row.toggleSelected() : undefined}
+                      onKeyDown={
+                        interactive
+                          ? (e) => {
+                              if (e.key === 'Enter' || e.key === ' ') {
+                                e.preventDefault();
+                                row.toggleSelected();
+                              }
+                            }
+                          : undefined
+                      }
+                    >
+                      {row.getVisibleCells().map((cell) => (
+                        <TableCell
+                          className={cn(
+                            'px-4 py-3.5 text-center text-sm text-slate-200',
+                            cell.column.getIsPinned() &&
+                              'sticky left-0 z-10 bg-slate-950/92 shadow-[10px_0_24px_rgba(2,6,23,0.22)] transition-colors group-hover:bg-slate-900/95 group-data-[state=selected]:bg-cyan-950/35'
+                          )}
+                          key={cell.id}
+                        >
+                          {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                        </TableCell>
+                      ))}
+                    </TableRow>
+                  );
+                })
               ) : (
                 <TableRow className="hover:bg-transparent">
                   <TableCell
-                    colSpan={columns.length}
+                    colSpan={table.getAllColumns().length}
                     className="h-28 px-6 text-center text-sm font-medium tracking-[0.18em] text-slate-400 uppercase"
                   >
                     No Results.

@@ -23,6 +23,7 @@
     "@tanstack/react-table": "catalog:grid",
     "ag-grid-community": "^35.2.1",
     "ag-grid-react": "^35.2.1",
+    "date-fns": "^4.1.0",
     "ky": "catalog:utils",
     "react": "catalog:frameworks",
     "react-dom": "catalog:frameworks",

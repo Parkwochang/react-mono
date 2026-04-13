@@ -1,40 +1,40 @@
-'use client';
+// 'use client';
 
-import { useState, useEffect } from 'react';
-// package
-import { getLocalStorage, setLocalStorage } from '@repo/utils';
+// import { useState, useEffect } from 'react';
+// // package
+// import { getLocalStorage, setLocalStorage } from '@repo/utils';
 
-// ----------------------------------------------------------------------
+// // ----------------------------------------------------------------------
 
-export function useLocalStorage<ValueType>(key: string, defaultValue: ValueType) {
-  const [value, setValue] = useState(() => {
-    const storedValue = getLocalStorage(key, defaultValue);
+// export function useLocalStorage<ValueType>(key: string, defaultValue: ValueType) {
+//   const [value, setValue] = useState(() => {
+//     const storedValue = getLocalStorage(key, defaultValue);
 
-    return storedValue;
-  });
+//     return storedValue;
+//   });
 
-  useEffect(() => {
-    const listener = (e: StorageEvent) => {
-      if (e.storageArea === localStorage && e.key === key) {
-        setValue(e.newValue ? JSON.parse(e.newValue) : e.newValue);
-      }
-    };
-    window.addEventListener('storage', listener);
+//   useEffect(() => {
+//     const listener = (e: StorageEvent) => {
+//       if (e.storageArea === localStorage && e.key === key) {
+//         setValue(e.newValue ? JSON.parse(e.newValue) : e.newValue);
+//       }
+//     };
+//     window.addEventListener('storage', listener);
 
-    return () => {
-      window.removeEventListener('storage', listener);
-    };
-  }, [key, defaultValue]);
+//     return () => {
+//       window.removeEventListener('storage', listener);
+//     };
+//   }, [key, defaultValue]);
 
-  const setValueInLocalStorage = (newValue: ValueType) => {
-    setValue((currentValue: ValueType) => {
-      const result = typeof newValue === 'function' ? newValue(currentValue) : newValue;
+//   const setValueInLocalStorage = (newValue: ValueType) => {
+//     setValue((currentValue: ValueType) => {
+//       const result = typeof newValue === 'function' ? newValue(currentValue) : newValue;
 
-      setLocalStorage(key, JSON.stringify(result));
+//       setLocalStorage(key, JSON.stringify(result));
 
-      return result;
-    });
-  };
+//       return result;
+//     });
+//   };
 
-  return [value, setValueInLocalStorage];
-}
+//   return [value, setValueInLocalStorage];
+// }

@@ -1,49 +1,71 @@
-import type { TableEntity } from '@/domains/table/api';
 import type { ColDef } from 'ag-grid-community';
 
-export const AG_COlUMN: ColDef<TableEntity.TableRes>[] = [
+import {
+  OwnerCellRenderer,
+  PriorityCellRenderer,
+  ProgressCellRenderer,
+  StatusCellRenderer,
+  TasksCellRenderer,
+  TeamCellRenderer,
+  UpdatedCellRenderer,
+} from '@/domains/ag-grid/components';
+import type { TableEntity } from '@/domains/table/api';
+
+// ----------------------------------------------------------------------
+
+export const AG_GRID_COLUMN: ColDef<TableEntity.TableRes>[] = [
   {
-    field: 'service',
-    headerName: 'Service',
-    minWidth: 180,
-    pinned: 'left',
-  },
-  {
-    field: 'owner',
+    colId: 'owner',
     headerName: 'Owner',
-    minWidth: 120,
+    field: 'owner',
+    pinned: 'left',
+    minWidth: 360,
+    flex: 1.8,
+    cellStyle: {
+      justifyContent: 'flex-start',
+    },
+    cellRenderer: OwnerCellRenderer,
   },
   {
-    field: 'squad',
-    headerName: 'Squad',
-    minWidth: 150,
-  },
-  {
-    field: 'stage',
-    headerName: 'Stage',
-    minWidth: 120,
-    // cellRenderer: StageCellRenderer,
+    field: 'status',
+    headerName: 'Status',
+    width: 180,
+    flex: 1,
+    cellRenderer: StatusCellRenderer,
   },
   {
     field: 'priority',
     headerName: 'Priority',
-    minWidth: 120,
-    // cellRenderer: PriorityCellRenderer,
+    width: 160,
+    flex: 1,
+    cellRenderer: PriorityCellRenderer,
+  },
+  {
+    field: 'team',
+    headerName: 'Team',
+    width: 150,
+    flex: 1,
+    cellRenderer: TeamCellRenderer,
   },
   {
     field: 'progress',
     headerName: 'Progress',
-    minWidth: 130,
-    // cellRenderer: ProgressCellRenderer,
+    width: 240,
+    flex: 1.2,
+    cellRenderer: ProgressCellRenderer,
   },
   {
-    field: 'tickets',
-    headerName: 'Tickets',
-    minWidth: 110,
+    field: 'tasks',
+    headerName: 'Tasks',
+    width: 120,
+    flex: 0.7,
+    cellRenderer: TasksCellRenderer,
   },
   {
     field: 'updatedAt',
     headerName: 'Updated',
-    minWidth: 120,
+    width: 150,
+    flex: 0.9,
+    cellRenderer: UpdatedCellRenderer,
   },
 ];

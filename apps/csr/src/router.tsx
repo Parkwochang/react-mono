@@ -1,9 +1,9 @@
 import { createRouter as createTanStackRouter } from '@tanstack/react-router';
+import { AgGridProvider } from 'ag-grid-react';
 
-import { createQueryClient } from './libs/query-client';
-import { QueryProvider } from './libs/query-provider';
 import { routeTree } from './routeTree.gen';
 import { LoadingIndicatorScreen } from './shared/ui';
+import { gridSharedModules, QueryProvider, createQueryClient } from './libs';
 
 // ----------------------------------------------------------------------
 
@@ -22,7 +22,11 @@ export function getRouter() {
     defaultPreloadStaleTime: 0,
     defaultPendingComponent: LoadingIndicatorScreen,
     defaultNotFoundComponent: () => <div>Not found</div>,
-    Wrap: ({ children }) => <QueryProvider client={queryClient}>{children}</QueryProvider>,
+    Wrap: ({ children }) => (
+      <QueryProvider client={queryClient}>
+        <AgGridProvider modules={gridSharedModules} /* licenseKey='' */>{children}</AgGridProvider>
+      </QueryProvider>
+    ),
   });
 
   return router;

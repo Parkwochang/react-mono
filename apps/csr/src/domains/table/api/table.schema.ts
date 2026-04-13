@@ -8,7 +8,7 @@ export const TableSchema = z.object({
   id       : z.string(),
   owner    : z.string(),
   team     : z.string(),
-  status   : z.string(),
+  status   : z.enum(['Live', 'Draft', 'Reviewing']),
   priority : z.enum(['Low', 'Medium', 'High']),
   progress : z.number(),
   tasks    : z.number(),
@@ -20,7 +20,7 @@ export const TableSchema = z.object({
 const UpsertTableSchema = z.object({
   owner    : z.string(),
   team     : z.string(),
-  status   : z.string(),
+  status   : z.enum(['Live', 'Draft', 'Reviewing']),
   priority : z.enum(['Low', 'Medium', 'High']),
   progress : z.number(),
   tasks    : z.number(),

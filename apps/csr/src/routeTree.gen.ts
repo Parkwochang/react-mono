@@ -13,6 +13,7 @@ import { Route as PostsRouteRouteImport } from './routes/posts/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as TableIndexRouteImport } from './routes/table/index'
 import { Route as PostsIndexRouteImport } from './routes/posts/index'
+import { Route as AgGridIndexRouteImport } from './routes/ag-grid/index'
 import { Route as AboutIndexRouteImport } from './routes/about/index'
 import { Route as PostsPostIdRouteImport } from './routes/posts/$postId'
 import { Route as PostsCreateIndexRouteImport } from './routes/posts/create/index'
@@ -37,6 +38,11 @@ const PostsIndexRoute = PostsIndexRouteImport.update({
   path: '/',
   getParentRoute: () => PostsRouteRoute,
 } as any)
+const AgGridIndexRoute = AgGridIndexRouteImport.update({
+  id: '/ag-grid/',
+  path: '/ag-grid/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AboutIndexRoute = AboutIndexRouteImport.update({
   id: '/about/',
   path: '/about/',
@@ -58,6 +64,7 @@ export interface FileRoutesByFullPath {
   '/posts': typeof PostsRouteRouteWithChildren
   '/posts/$postId': typeof PostsPostIdRoute
   '/about/': typeof AboutIndexRoute
+  '/ag-grid/': typeof AgGridIndexRoute
   '/posts/': typeof PostsIndexRoute
   '/table/': typeof TableIndexRoute
   '/posts/create/': typeof PostsCreateIndexRoute
@@ -66,6 +73,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/posts/$postId': typeof PostsPostIdRoute
   '/about': typeof AboutIndexRoute
+  '/ag-grid': typeof AgGridIndexRoute
   '/posts': typeof PostsIndexRoute
   '/table': typeof TableIndexRoute
   '/posts/create': typeof PostsCreateIndexRoute
@@ -76,6 +84,7 @@ export interface FileRoutesById {
   '/posts': typeof PostsRouteRouteWithChildren
   '/posts/$postId': typeof PostsPostIdRoute
   '/about/': typeof AboutIndexRoute
+  '/ag-grid/': typeof AgGridIndexRoute
   '/posts/': typeof PostsIndexRoute
   '/table/': typeof TableIndexRoute
   '/posts/create/': typeof PostsCreateIndexRoute
@@ -87,17 +96,26 @@ export interface FileRouteTypes {
     | '/posts'
     | '/posts/$postId'
     | '/about/'
+    | '/ag-grid/'
     | '/posts/'
     | '/table/'
     | '/posts/create/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/posts/$postId' | '/about' | '/posts' | '/table' | '/posts/create'
+  to:
+    | '/'
+    | '/posts/$postId'
+    | '/about'
+    | '/ag-grid'
+    | '/posts'
+    | '/table'
+    | '/posts/create'
   id:
     | '__root__'
     | '/'
     | '/posts'
     | '/posts/$postId'
     | '/about/'
+    | '/ag-grid/'
     | '/posts/'
     | '/table/'
     | '/posts/create/'
@@ -107,6 +125,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   PostsRouteRoute: typeof PostsRouteRouteWithChildren
   AboutIndexRoute: typeof AboutIndexRoute
+  AgGridIndexRoute: typeof AgGridIndexRoute
   TableIndexRoute: typeof TableIndexRoute
 }
 
@@ -139,6 +158,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/posts/'
       preLoaderRoute: typeof PostsIndexRouteImport
       parentRoute: typeof PostsRouteRoute
+    }
+    '/ag-grid/': {
+      id: '/ag-grid/'
+      path: '/ag-grid'
+      fullPath: '/ag-grid/'
+      preLoaderRoute: typeof AgGridIndexRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/about/': {
       id: '/about/'
@@ -184,6 +210,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   PostsRouteRoute: PostsRouteRouteWithChildren,
   AboutIndexRoute: AboutIndexRoute,
+  AgGridIndexRoute: AgGridIndexRoute,
   TableIndexRoute: TableIndexRoute,
 }
 export const routeTree = rootRouteImport

@@ -4,6 +4,7 @@ import { useGetTable } from '@/domains/table/hooks';
 import { useGrid } from '@/shared/hooks';
 
 // ----------------------------------------------------------------------
+// ! 그리드 내 CREATE, UPDATE, DELETE, FILTER 핸들러 예제
 
 export const useGridCUD = () => {
   const tableData = useGetTable();
@@ -12,9 +13,6 @@ export const useGridCUD = () => {
     rowData: tableData.data,
     columnDefs: AG_GRID_COLUMN,
     getRowId: (params) => params.data.id,
-    suppressCellFocus: true,
-    suppressRowHoverHighlight: true,
-    animateRows: true,
   });
 
   const gridApi = gridApiRef.current;

@@ -1,11 +1,11 @@
 import type { CustomCellRendererProps } from 'ag-grid-react';
 
-import type { TableEntity } from '@/domains/table/api';
+import type { GridEntity } from '../api';
 import { cn } from '@/libs';
 
 // ----------------------------------------------------------------------
 
-export function OwnerCellRenderer({ data }: CustomCellRendererProps<TableEntity.TableRes, string>) {
+export function OwnerCellRenderer({ data }: CustomCellRendererProps<GridEntity.GridRes, string>) {
   if (!data) return null;
 
   return (
@@ -25,7 +25,7 @@ export function OwnerCellRenderer({ data }: CustomCellRendererProps<TableEntity.
 
 // ----------------------------------------------------------------------
 
-export function StatusCellRenderer({ value }: CustomCellRendererProps<TableEntity.TableRes, string>) {
+export function StatusCellRenderer({ value }: CustomCellRendererProps<GridEntity.GridRes, string>) {
   if (!value) return null;
 
   return (
@@ -44,7 +44,7 @@ export function StatusCellRenderer({ value }: CustomCellRendererProps<TableEntit
 
 // ----------------------------------------------------------------------
 
-export function PriorityCellRenderer({ value }: CustomCellRendererProps<TableEntity.TableRes, string>) {
+export function PriorityCellRenderer({ value }: CustomCellRendererProps<GridEntity.GridRes, string>) {
   if (!value) return null;
 
   return (
@@ -63,13 +63,13 @@ export function PriorityCellRenderer({ value }: CustomCellRendererProps<TableEnt
 
 // ----------------------------------------------------------------------
 
-export function TeamCellRenderer({ value }: CustomCellRendererProps<TableEntity.TableRes, string>) {
+export function TeamCellRenderer({ value }: CustomCellRendererProps<GridEntity.GridRes, string>) {
   return <span className="text-slate-200">{String(value ?? '')}</span>;
 }
 
 // ----------------------------------------------------------------------
 
-export function ProgressCellRenderer({ value }: CustomCellRendererProps<TableEntity.TableRes, number>) {
+export function ProgressCellRenderer({ value }: CustomCellRendererProps<GridEntity.GridRes, number>) {
   const safeValue = typeof value === 'number' ? Math.max(0, Math.min(100, value)) : 0;
 
   return (
@@ -87,12 +87,12 @@ export function ProgressCellRenderer({ value }: CustomCellRendererProps<TableEnt
 
 // ----------------------------------------------------------------------
 
-export function TasksCellRenderer({ value }: CustomCellRendererProps<TableEntity.TableRes, number>) {
+export function TasksCellRenderer({ value }: CustomCellRendererProps<GridEntity.GridRes, number>) {
   return <span className="font-medium text-white">{String(value ?? '')}</span>;
 }
 
 // ----------------------------------------------------------------------
 
-export function UpdatedCellRenderer({ value }: CustomCellRendererProps<TableEntity.TableRes, string>) {
+export function UpdatedCellRenderer({ value }: CustomCellRendererProps<GridEntity.GridRes, string>) {
   return <span className="text-slate-300">{String(value ?? '')}</span>;
 }

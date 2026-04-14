@@ -1,3 +1,3 @@
-export * from './post.schema';
-export * from './post.query';
-export * from './post.command';
+export * from './ag-grid.query';
+export * from './ag-grid.api';
+export * from './ag-grid.schema';

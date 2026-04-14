@@ -2,19 +2,20 @@ import { STATUS_OPTIONS } from '@/constants/config';
 import { cn } from '@/libs';
 import { Input } from '@/shared/ui';
 import { useState } from 'react';
+import type { GridEntity } from '../api';
 
 // ----------------------------------------------------------------------
 
 interface Props {
   onOwnerChange: (owner: string) => void;
-  onStatusChange: (status: (typeof STATUS_OPTIONS)[number]['value']) => void;
+  onStatusChange: (status: GridEntity.GridRes['status'] | '') => void;
   onAddRow: () => void;
 }
 
 export const AgGridFilter = ({ onAddRow, onOwnerChange, onStatusChange }: Props) => {
   // ! 추후 훅폼이나 api로 변경점
 
-  const [statusFilter, setStatusFilter] = useState<(typeof STATUS_OPTIONS)[number]['value']>('');
+  const [statusFilter, setStatusFilter] = useState<GridEntity.GridRes['status'] | ''>('');
   const [ownerFilter, setOwnerFilter] = useState<string>('');
 
   const handleOwnerChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -24,7 +25,7 @@ export const AgGridFilter = ({ onAddRow, onOwnerChange, onStatusChange }: Props)
     onOwnerChange(value);
   };
 
-  const handleStatusChange = (value: (typeof STATUS_OPTIONS)[number]['value']) => () => {
+  const handleStatusChange = (value: GridEntity.GridRes['status'] | '') => () => {
     setStatusFilter(value);
     onStatusChange(value);
   };

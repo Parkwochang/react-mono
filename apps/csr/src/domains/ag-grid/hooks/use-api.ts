@@ -1,28 +1,21 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 
-import { createPost, getPostsQuery, type PostSchema } from '../api';
+import { createGrid, getGridsQuery, type GridEntity } from '../api';
 
 // ----------------------------------------------------------------------
 // ! 포스트 GET
 
-export function usePost(id: PostSchema.Req) {
-  const { data, isLoading, error } = useQuery({
-    ...getPostsQuery(id),
+export function useGrid() {
+  return useQuery({
+    ...getGridsQuery(),
   });
-
-  return { data, isLoading, error };
 }
 
 // ----------------------------------------------------------------------
 // ! 포스트 POST
 
-export function useCreatePost() {
-  const queryClient = useQueryClient();
-
+export function useCreateGrid() {
   return useMutation({
-    mutationFn: (payload: PostSchema.Create) => createPost(payload),
-    onSuccess: (createdPost) => {
-      queryClient.setQueryData(getPostsQuery(createdPost.id).queryKey, createdPost);
-    },
+    mutationFn: (payload: GridEntity.CreateGrid) => createGrid(payload),
   });
 }

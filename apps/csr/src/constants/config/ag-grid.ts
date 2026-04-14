@@ -1,4 +1,4 @@
-import type { ColDef } from 'ag-grid-community';
+import type { ColDef, GridOptions } from 'ag-grid-community';
 
 // ----------------------------------------------------------------------
 // ! 그리드 기본 컬럼
@@ -8,12 +8,23 @@ export const DEFAULT_COL_DEF: ColDef = {
   filter: true,
   resizable: true,
   suppressMovable: true,
+  suppressHeaderFilterButton: true,
+  suppressHeaderMenuButton: true,
   flex: 1,
   minWidth: 120,
   cellStyle: {
     justifyContent: 'center',
   },
 } as const;
+
+// ----------------------------------------------------------------------
+// ! 그리드 기본 옵션
+
+export const DEFAULT_GRID_OPTIONS: GridOptions = {
+  suppressCellFocus: true,
+  suppressRowHoverHighlight: true,
+  animateRows: true,
+};
 
 // ----------------------------------------------------------------------
 // ! 그리드 기본 사이즈

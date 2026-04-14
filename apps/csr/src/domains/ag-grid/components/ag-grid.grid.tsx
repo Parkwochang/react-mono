@@ -38,21 +38,3 @@ export const AgGridSample = () => {
     </section>
   );
 };
-
-{
-  /* <AgGridReact
-rowData={filteredRows}
-columnDefs={COLUMN_DEFS}
-defaultColDef={DEFAULT_COL_DEF}
-getRowId={(params: GetRowIdParams<TableEntity.TableRes>) => params.data.id}
-rowHeight={ROW_HEIGHT}
-headerHeight={HEADER_HEIGHT}
-suppressCellFocus
-suppressRowHoverHighlight
-animateRows
-rowClassRules={{
-  'ag-grid-row-active': (params) => params.data?.id === selectedRowId,
-}}
-onRowClicked={handleRowClick}
-/> */
-}

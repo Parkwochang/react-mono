@@ -2,7 +2,7 @@ import { useCallback, useRef, useState } from 'react';
 import type { ColDef, GridApi, GridReadyEvent } from 'ag-grid-community';
 import type { AgGridReactProps } from 'ag-grid-react';
 
-import { DEFAULT_COL_DEF, DEFAULT_GRID_SIZE } from '@/constants/config';
+import { DEFAULT_COL_DEF, DEFAULT_GRID_OPTIONS, DEFAULT_GRID_SIZE } from '@/constants/config';
 
 // ----------------------------------------------------------------------
 
@@ -35,6 +35,7 @@ export const useGrid = <TData extends unknown>(options?: UseGridProps<TData>): U
     onGridReady,
     ...DEFAULT_GRID_SIZE,
     defaultColDef: DEFAULT_COL_DEF,
+    ...DEFAULT_GRID_OPTIONS,
     ...options,
   };
 };

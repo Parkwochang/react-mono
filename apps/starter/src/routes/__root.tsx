@@ -1,23 +1,26 @@
-import { createRootRouteWithContext, HeadContent, Link, Scripts, useParams } from '@tanstack/react-router';
+import {
+  createRootRouteWithContext,
+  HeadContent,
+  Link,
+  Scripts,
+} from "@tanstack/react-router";
 
-import type { AppRouterContext } from '../libs/query-client';
+import type { AppRouterContext } from "../libs/query-client";
 
-import appCss from '../styles.css?url';
-import { useQuery } from '@tanstack/react-query';
-import { getPostsQuery } from '@/domains/posts/api';
+import appCss from "../styles.css?url";
 
 export const Route = createRootRouteWithContext<AppRouterContext>()({
   head: () => ({
     meta: [
-      { charSet: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { title: 'Sample File Routing App' },
+      { charSet: "utf-8" },
+      { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { title: "Sample File Routing App" },
       {
-        name: 'description',
-        content: 'Sample pages for checking TanStack Start file-based routing.',
+        name: "description",
+        content: "Sample pages for checking TanStack Start file-based routing.",
       },
     ],
-    links: [{ rel: 'stylesheet', href: appCss }],
+    links: [{ rel: "stylesheet", href: appCss }],
   }),
   shellComponent: RootDocument,
   // 공통 에러 -> api 에러 발생시 get 400, post 401 등 에러 발생시 이 컴포넌트가 렌더링됨
@@ -41,8 +44,12 @@ function RootDocument({ children }: { children: React.ReactNode }) {
           <header className="mb-8 rounded-3xl border border-white/10 bg-white/5 px-5 py-4 backdrop-blur">
             <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
               <div>
-                <p className="text-sm font-medium text-cyan-300">TanStack Start Sample</p>
-                <h1 className="text-2xl font-semibold tracking-tight text-white">파일 라우팅 확인용 샘플</h1>
+                <p className="text-sm font-medium text-cyan-300">
+                  TanStack Start Sample
+                </p>
+                <h1 className="text-2xl font-semibold tracking-tight text-white">
+                  파일 라우팅 확인용 샘플
+                </h1>
               </div>
               <nav className="flex flex-wrap gap-2 text-sm">
                 <NavLink to="/">Home</NavLink>
@@ -64,13 +71,17 @@ function RootDocument({ children }: { children: React.ReactNode }) {
   );
 }
 
-function NavLink(props: { to: '/' | '/about' | '/posts'; children: React.ReactNode }) {
+function NavLink(props: {
+  to: "/" | "/about" | "/posts";
+  children: React.ReactNode;
+}) {
   return (
     <Link
       to={props.to}
       className="rounded-full border border-white/10 px-4 py-2 text-slate-300 transition hover:border-cyan-400/50 hover:text-white"
       activeProps={{
-        className: 'rounded-full border border-cyan-400/70 bg-cyan-400/10 px-4 py-2 text-white',
+        className:
+          "rounded-full border border-cyan-400/70 bg-cyan-400/10 px-4 py-2 text-white",
       }}
     >
       {props.children}

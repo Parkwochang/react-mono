@@ -1,0 +1,23 @@
+#!/bin/sh
+set -e
+
+# Get staged files
+STAGED=$(git diff --cached --name-only --diff-filter=ACMR)
+
+if [ -z "$STAGED" ]; then
+  exit 0
+fi
+
+# Run lint and type checks via turbo
+echo "[pre-commit] Running lint and type checks..."
+pnpm commit
+
+echo "[pre-commit] Running format checks..."
+
+# Run prettier on staged files
+echo "$STAGED" | xargs -I{} pnpm exec prettier --write -- "{}" 2>/dev/null || true
+
+# Re-add formatted files
+echo "$STAGED" | xargs -I{} git add -- "{}"
+
+echo "[pre-commit] Done!"

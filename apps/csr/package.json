@@ -10,9 +10,8 @@
     "build": "vite build",
     "preview": "vite preview",
     "test": "vitest run",
-    "format": "biome format",
-    "lint": "biome lint",
-    "check": "biome check",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "lint": "eslint . --max-warnings=20 --cache --fix",
     "check-types": "tsc --noEmit"
   },
   "dependencies": {

@@ -344,6 +344,25 @@ importers:
         specifier: catalog:frameworks
         version: 3.2.4(@types/node@22.10.2)(jiti@2.6.1)(jsdom@28.1.0)(lightningcss@1.32.0)(tsx@4.21.0)
 
+  packages/api:
+    dependencies:
+      '@repo/utils':
+        specifier: workspace:*
+        version: link:../utils
+      ky:
+        specifier: catalog:utils
+        version: 2.0.0
+    devDependencies:
+      '@repo/typescript-config':
+        specifier: workspace:*
+        version: link:../../tools/typescript-config
+      '@types/node':
+        specifier: catalog:frameworks
+        version: 22.10.2
+      typescript:
+        specifier: 'catalog:'
+        version: 5.9.2
+
   packages/errors: {}
 
   packages/ui:
@@ -375,6 +394,15 @@ importers:
         version: 9.39.1(jiti@2.6.1)
       typescript:
         specifier: 5.9.2
+        version: 5.9.2
+
+  packages/utils:
+    devDependencies:
+      '@repo/typescript-config':
+        specifier: workspace:*
+        version: link:../../tools/typescript-config
+      typescript:
+        specifier: 'catalog:'
         version: 5.9.2
 
   tools/eslint-config:

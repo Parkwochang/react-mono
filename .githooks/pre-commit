@@ -8,10 +8,6 @@ if [ -z "$STAGED" ]; then
   exit 0
 fi
 
-# Run lint and type checks via turbo
-echo "[pre-commit] Running lint and type checks..."
-pnpm commit
-
 echo "[pre-commit] Running format checks..."
 
 # Run prettier on staged files
@@ -19,5 +15,10 @@ echo "$STAGED" | xargs -I{} pnpm exec prettier --write -- "{}" 2>/dev/null || tr
 
 # Re-add formatted files
 echo "$STAGED" | xargs -I{} git add -- "{}"
+
+# Run lint and type checks via turbo
+echo "[pre-commit] Running lint and type checks..."
+pnpm lint
+pnpm check-types
 
 echo "[pre-commit] Done!"

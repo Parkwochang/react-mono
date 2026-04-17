@@ -10,9 +10,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "test": "vitest run",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "lint": "eslint . --max-warnings=20 --cache --fix",
-    "check-types": "tsc --noEmit"
+    "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
   "dependencies": {
     "@hookform/resolvers": "catalog:validators",
@@ -31,6 +29,8 @@
   },
   "devDependencies": {
     "@biomejs/biome": "2.4.5",
+    "@repo/eslint-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
     "@tailwindcss/typography": "catalog:styles",
     "@tailwindcss/vite": "catalog:styles",
     "@tanstack/devtools-vite": "catalog:frameworks",

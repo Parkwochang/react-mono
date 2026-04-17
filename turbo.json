@@ -16,6 +16,9 @@
     "dev": {
       "cache": false,
       "persistent": true
+    },
+    "commit": {
+      "dependsOn": ["^lint", "^check-types"]
     }
   }
 }

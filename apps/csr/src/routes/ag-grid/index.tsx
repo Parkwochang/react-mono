@@ -1,7 +1,7 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute } from '@tanstack/react-router';
 
-import { AgGridScreen } from "@/domains/ag-grid/components";
+import { AgGridScreen } from '@/domains/ag-grid/components';
 
-export const Route = createFileRoute("/ag-grid/")({
-	component: AgGridScreen,
+export const Route = createFileRoute('/ag-grid/')({
+  component: AgGridScreen,
 });
